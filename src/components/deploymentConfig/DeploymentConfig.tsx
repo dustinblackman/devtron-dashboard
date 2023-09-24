@@ -583,7 +583,7 @@ export default function DeploymentConfig({
                 action=""
                 className={`white-card__deployment-config p-0 bcn-0 ${state.openComparison ? 'comparison-view' : ''} ${
                     state.showReadme ? 'readme-view' : ''
-                }`}
+                } ${state.yamlMode ? '' : 'dc__overflow-scroll'}`}
                 onSubmit={handleSubmit}
             >
                 <DeploymentTemplateOptionsTab

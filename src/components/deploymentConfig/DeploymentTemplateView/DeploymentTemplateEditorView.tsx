@@ -19,6 +19,8 @@ import { MarkDown } from '../../charts/discoverChartDetail/DiscoverChartDetails'
 import { useParams } from 'react-router-dom'
 import { DeploymentConfigContext } from '../DeploymentConfig'
 import DeploymentTemplateGUIView from './DeploymentTemplateGUIView'
+import ChartValuesGUIForm from '../../v2/values/chartValuesDiff/ChartValuesGUIView'
+import { convertSchemaJsonToMap } from '../../v2/values/chartValuesDiff/ChartValuesView.utils'
 
 export default function DeploymentTemplateEditorView({
     isEnvOverride,
@@ -298,10 +300,24 @@ export default function DeploymentTemplateEditorView({
         return renderCodeEditor()
     }
 
-    return state.yamlMode ||
-        (state.selectedChart?.name !== ROLLOUT_DEPLOYMENT && state.selectedChart?.name !== DEPLOYMENT) ? (
-        renderCodeEditorView()
+    return !state.yamlMode && state.schema ? (
+      <div className="pt-8 pl-16 pr-16" style={{overflow: 'hidden'}}>
+        <ChartValuesGUIForm
+          schemaJson={convertSchemaJsonToMap(JSON.stringify(state.schema))}
+          valuesYamlDocument={YAML.parseDocument(value || defaultValue || "") }
+          fetchingSchemaJson={false}
+          openReadMe={false}
+          isUpdateInProgress={false}
+          isDeleteInProgress={false}
+          isDeployChartView={false}
+          isCreateValueView={true}
+          deployOrUpdateApplication={() => Promise.resolve()}
+          dispatch={() => {}}
+          formValidationError={{}}
+          showSubmitButton={false}
+        />
+      </div>
     ) : (
-        <DeploymentTemplateGUIView fetchingValues={fetchingValues} value={value} readOnly={readOnly} />
+        renderCodeEditorView()
     )
 }

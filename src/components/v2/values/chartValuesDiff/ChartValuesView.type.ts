@@ -369,6 +369,7 @@ export interface ChaartValuesGUIFormType {
     deployOrUpdateApplication: (forceUpdate?: boolean) => Promise<void>
     dispatch: React.Dispatch<ChartValuesViewAction>
     formValidationError: Record<string, boolean>
+    showSubmitButton?: boolean
 }
 
 export interface ActiveReadmeColumnProps {
