@@ -563,9 +563,10 @@ export default function DeploymentConfig({
         if (state.selectedChart.name === ROLLOUT_DEPLOYMENT || state.selectedChart.name === DEPLOYMENT) {
             requestData.isBasicViewLocked = state.isBasicLocked
             requestData.currentViewEditor = state.isBasicLocked ? EDITOR_VIEW.ADVANCED : state.currentEditorView
-            if (!state.yamlMode) {
-                requestData.valuesOverride = patchBasicData(obj, state.basicFieldValues)
-            }
+            // TODO delete.
+            // if (!state.yamlMode) {
+            //     requestData.valuesOverride = patchBasicData(obj, state.basicFieldValues)
+            // }
         }
 
         if (!skipReadmeAndSchema) {
@@ -583,7 +584,7 @@ export default function DeploymentConfig({
                 action=""
                 className={`white-card__deployment-config p-0 bcn-0 ${state.openComparison ? 'comparison-view' : ''} ${
                     state.showReadme ? 'readme-view' : ''
-                }`}
+                } ${state.yamlMode ? '' : 'dc__overflow-scroll'}`}
                 onSubmit={handleSubmit}
             >
                 <DeploymentTemplateOptionsTab

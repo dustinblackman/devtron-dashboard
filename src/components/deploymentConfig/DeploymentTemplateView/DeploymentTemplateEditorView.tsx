@@ -19,6 +19,7 @@ import { MarkDown } from '../../charts/discoverChartDetail/DiscoverChartDetails'
 import { useParams } from 'react-router-dom'
 import { DeploymentConfigContext } from '../DeploymentConfig'
 import DeploymentTemplateGUIView from './DeploymentTemplateGUIView'
+import JSONSchemaForm from "./JSONSchemaForm";
 
 export default function DeploymentTemplateEditorView({
     isEnvOverride,
@@ -298,10 +299,11 @@ export default function DeploymentTemplateEditorView({
         return renderCodeEditor()
     }
 
-    return state.yamlMode ||
-        (state.selectedChart?.name !== ROLLOUT_DEPLOYMENT && state.selectedChart?.name !== DEPLOYMENT) ? (
+    return state.yamlMode ? (
         renderCodeEditorView()
     ) : (
-        <DeploymentTemplateGUIView fetchingValues={fetchingValues} value={value} readOnly={readOnly} />
+      <div className="pt-8 pl-16 pr-16" style={{overflow: 'hidden'}}>
+        <JSONSchemaForm schemaJson={state.schema} value={value || defaultValue} onChange={editorOnChange}/>
+      </div>
     )
 }

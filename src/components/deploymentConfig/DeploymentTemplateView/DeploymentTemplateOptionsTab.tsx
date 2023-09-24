@@ -112,8 +112,7 @@ export default function DeploymentTemplateOptionsTab({
                     selectedChartRefId={currentStateValues.selectedChartRefId}
                     disableVersionSelect={disableVersionSelect}
                 />
-                {(currentStateValues.selectedChart?.name === ROLLOUT_DEPLOYMENT ||
-                    currentStateValues.selectedChart?.name === DEPLOYMENT) && (
+                {currentStateValues.schema && (
                     <ConditionalWrap condition={_unableToParseYaml} wrap={invalidYamlTippyWrapper}>
                         <RadioGroup
                             className="gui-yaml-switch"
