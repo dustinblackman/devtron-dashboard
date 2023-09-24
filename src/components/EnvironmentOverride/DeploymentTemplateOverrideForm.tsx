@@ -214,10 +214,10 @@ export default function DeploymentTemplateOverrideForm({
             })
 
             if (str && state.currentEditorView && !state.isBasicLocked && !fromBasic) {
-                dispatch({
-                    type: DeploymentConfigStateActionTypes.isBasicLocked,
-                    payload: isBasicValueChanged(parsedValues),
-                })
+                // dispatch({
+                //     type: DeploymentConfigStateActionTypes.isBasicLocked,
+                //     payload: isBasicValueChanged(parsedValues),
+                // })
             }
         } catch (error) {
             // Set unableToParseYaml flag when yaml is malformed

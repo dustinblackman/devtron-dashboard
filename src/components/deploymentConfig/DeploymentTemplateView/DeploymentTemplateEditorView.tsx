@@ -20,7 +20,7 @@ import { useParams } from 'react-router-dom'
 import { DeploymentConfigContext } from '../DeploymentConfig'
 import DeploymentTemplateGUIView from './DeploymentTemplateGUIView'
 import ChartValuesGUIForm from '../../v2/values/chartValuesDiff/ChartValuesGUIView'
-import { convertSchemaJsonToMap } from '../../v2/values/chartValuesDiff/ChartValuesView.utils'
+import GUIView from './GUIView'
 
 export default function DeploymentTemplateEditorView({
     isEnvOverride,
@@ -301,22 +301,11 @@ export default function DeploymentTemplateEditorView({
     }
 
     return !state.yamlMode && state.schema ? (
-      <div className="pt-8 pl-16 pr-16" style={{overflow: 'hidden'}}>
-        <ChartValuesGUIForm
-          schemaJson={convertSchemaJsonToMap(JSON.stringify(state.schema))}
-          valuesYamlDocument={YAML.parseDocument(value || defaultValue || "") }
-          fetchingSchemaJson={false}
-          openReadMe={false}
-          isUpdateInProgress={false}
-          isDeleteInProgress={false}
-          isDeployChartView={false}
-          isCreateValueView={true}
-          deployOrUpdateApplication={() => Promise.resolve()}
-          dispatch={() => {}}
-          formValidationError={{}}
-          showSubmitButton={false}
-        />
-      </div>
+      <GUIView
+        schema={state.schema}
+        yamlValue={value || defaultValue || ""}
+        onChange={editorOnChange}
+      />
     ) : (
         renderCodeEditorView()
     )

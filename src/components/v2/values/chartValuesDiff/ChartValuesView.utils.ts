@@ -303,7 +303,7 @@ export const getAndUpdateSchemaValue = (
     modifiedValuesYaml: string,
     schemaJson: Map<string, any>,
     dispatch: (action: ChartValuesViewAction) => void,
-): void => {
+): Map<string, any> => {
     const parsedValuesYamlDocument = YAML.parseDocument(modifiedValuesYaml || '')
     const updatedSchemaJson = schemaJson
 
@@ -327,6 +327,8 @@ export const getAndUpdateSchemaValue = (
             schemaJson: updatedSchemaJson,
         },
     })
+
+    return updatedSchemaJson;
 }
 
 const getPathKeyAndPropsPair = (
